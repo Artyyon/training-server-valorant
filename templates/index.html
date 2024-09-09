@@ -1,73 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TICS - Treino Inteligente</title>
+    <title>TICS - Treino Inteligente de Contadores</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>TICS - Treino Inteligente de Contadores</h1>
-
-    <div class="training-container">
-        {% for training in trainings %}
-        <div class="training">
-            <h2>{{ training.name }}</h2>
-            <ul>
-                {% for counter in training.counters %}
-                <li>
-                    {{ counter.name }}: {{ counter.count }} / {{ counter.max_count }}
-                    <button onclick="updateCounter({{ training.id }}, {{ counter.id }})">Incrementar</button>
-                    <button onclick="resetCounter({{ training.id }}, {{ counter.id }})">Resetar</button>
-                </li>
-                {% endfor %}
-            </ul>
-            <button onclick="resetTraining({{ training.id }})">Resetar todos os contadores</button>
-        </div>
-        {% endfor %}
+    <div class="header">
+        <h1>TICS - Treino Inteligente de Contadores</h1>
     </div>
 
-    <script>
-        async function updateCounter(trainingId, counterId) {
-            const response = await fetch('/update-counter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    training_id: trainingId,
-                    counter_id: counterId
-                })
-            });
-            location.reload();
-        }
+    <div class="container">
+        <div class="card">
+            <h2>Aquecimento</h2>
+            <ul>
+                <li>100 kills: 0 / 3</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>Treino difícil: 0 / 5</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>DM: 0 / 1</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <button class="btn-reset-all">Resetar todos os contadores</button>
+            </ul>
+        </div>
 
-        async function resetCounter(trainingId, counterId) {
-            const response = await fetch('/reset-counter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    training_id: trainingId,
-                    counter_id: counterId
-                })
-            });
-            location.reload();
-        }
+        <div class="card">
+            <h2>rikfps (Neverest)</h2>
+            <ul>
+                <li>Tracking (RA MIDRANGE FAST STRAFES MPC): 0 / 5</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>Precisão (RA HEADCLICK): 0 / 5</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>Reação e Precisão (RA VALORANT ASCENT HORDE): 0 / 5</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>Treino de Mira Contra Strafe (VT PEEKSHOT): 0 / 5</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <button class="btn-reset-all">Resetar todos os contadores</button>
+            </ul>
+        </div>
 
-        async function resetTraining(trainingId) {
-            const response = await fetch('/reset-counter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    training_id: trainingId
-                })
-            });
-            location.reload();
-        }
-    </script>
+        <div class="card">
+            <h2>nAts</h2>
+            <ul>
+                <li>100 kills: 0 / 15</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>Treino difícil: 0 / 15</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <li>DM: 0 / 5</li>
+                <div class="btn-group">
+                    <button class="btn">Incrementar</button>
+                    <button class="btn-reset">Resetar</button>
+                </div>
+                <button class="btn-reset-all">Resetar todos os contadores</button>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
