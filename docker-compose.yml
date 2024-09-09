@@ -1,0 +1,12 @@
+version: '3'
+services:
+  tics-counter:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./trainings:/app/trainings
+      - ./templates:/app/templates
+      - ./static:/app/static
+    stdin_open: true
+    tty: true

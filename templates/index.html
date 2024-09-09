@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TICS - Treino Inteligente</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>TICS - Treino Inteligente de Contadores</h1>
+
+    <div class="training-container">
+        {% for training in trainings %}
+        <div class="training">
+            <h2>{{ training.name }}</h2>
+            <ul>
+                {% for counter in training.counters %}
+                <li>
+                    {{ counter.name }}: {{ counter.count }} / {{ counter.max_count }}
+                    <button onclick="updateCounter({{ training.id }}, {{ counter.id }})">Incrementar</button>
+                    <button onclick="resetCounter({{ training.id }}, {{ counter.id }})">Resetar</button>
+                </li>
+                {% endfor %}
+            </ul>
+            <button onclick="resetTraining({{ training.id }})">Resetar todos os contadores</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        async function updateCounter(trainingId, counterId) {
+            const response = await fetch('/update-counter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    training_id: trainingId,
+                    counter_id: counterId
+                })
+            });
+            location.reload();
+        }
+
+        async function resetCounter(trainingId, counterId) {
+            const response = await fetch('/reset-counter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    training_id: trainingId,
+                    counter_id: counterId
+                })
+            });
+            location.reload();
+        }
+
+        async function resetTraining(trainingId) {
+            const response = await fetch('/reset-counter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    training_id: trainingId
+                })
+            });
+            location.reload();
+        }
+    </script>
+</body>
+</html>
