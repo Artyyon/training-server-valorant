@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,78 +10,46 @@
     <div class="header">
         <h1>TICS - Treino Inteligente de Contadores</h1>
     </div>
-
     <div class="container">
         <div class="card">
             <h2>Aquecimento</h2>
             <ul>
-                <li>100 kills: 0 / 3</li>
+                <li>100 kills: <span id="kill-count-1">0</span> / 3</li>
                 <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
+                    <button class="btn" onclick="increment('kill-count-1', 3)">Incrementar</button>
+                    <button class="btn-reset" onclick="resetCount('kill-count-1')">Resetar</button>
                 </div>
-                <li>Treino difícil: 0 / 5</li>
+                <li>Treino difícil: <span id="difficult-training-count-1">0</span> / 5 </li>
                 <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
+                    <button class="btn" onclick="increment('difficult-training-count-1', 5)">Incrementar</button>
+                    <button class="btn-reset" onclick="resetCount('difficult-training-count-1')">Resetar</button>
                 </div>
-                <li>DM: 0 / 1</li>
+                <li>DM: <span id="dm-count-1">0</span> / 1 </li>
                 <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
+                    <button class="btn" onclick="increment('dm-count-1', 1)">Incrementar</button>
+                    <button class="btn-reset" onclick="resetCount('dm-count-1')">Resetar</button>
                 </div>
-                <button class="btn-reset-all">Resetar todos os contadores</button>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>rikfps (Neverest)</h2>
-            <ul>
-                <li>Tracking (RA MIDRANGE FAST STRAFES MPC): 0 / 5</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <li>Precisão (RA HEADCLICK): 0 / 5</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <li>Reação e Precisão (RA VALORANT ASCENT HORDE): 0 / 5</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <li>Treino de Mira Contra Strafe (VT PEEKSHOT): 0 / 5</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <button class="btn-reset-all">Resetar todos os contadores</button>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>nAts</h2>
-            <ul>
-                <li>100 kills: 0 / 15</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <li>Treino difícil: 0 / 15</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <li>DM: 0 / 5</li>
-                <div class="btn-group">
-                    <button class="btn">Incrementar</button>
-                    <button class="btn-reset">Resetar</button>
-                </div>
-                <button class="btn-reset-all">Resetar todos os contadores</button>
+                <button class="btn-reset-all" onclick="resetAll('kill-count-1', 'difficult-training-count-1', 'dm-count-1')">Resetar todos os contadores</button>
             </ul>
         </div>
     </div>
+
+    <script>
+        function increment(id, max) {
+            var span = document.getElementById(id);
+            var count = parseInt(span.textContent);
+            if (count < max) {
+                span.textContent = count + 1;
+            }
+        }
+
+        function resetCount(id) {
+            document.getElementById(id).textContent = '0';
+        }
+
+        function resetAll(...ids) {
+            ids.forEach(id => resetCount(id));
+        }
+    </script>
 </body>
 </html>
