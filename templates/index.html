@@ -11,44 +11,77 @@
         <h1>TICS - Treino Inteligente de Contadores</h1>
     </div>
     <div class="container">
+        <!-- Gerar cards dinamicamente com Jinja -->
+        {% for training in trainings %}
         <div class="card">
-            <h2>Aquecimento</h2>
+            <h2>{{ training.name }}</h2>
             <ul>
-                <li>100 kills: <span id="kill-count-1">0</span> / 3</li>
+                <!-- Gerar contadores dinamicamente -->
+                {% for counter in training.counters %}
+                <li>{{ counter.name }}: <span id="counter-{{ training.id }}-{{ counter.id }}">{{ counter.count }}</span> / {{ counter.max_count }}</li>
                 <div class="btn-group">
-                    <button class="btn" onclick="increment('kill-count-1', 3)">Incrementar</button>
-                    <button class="btn-reset" onclick="resetCount('kill-count-1')">Resetar</button>
+                    <button class="btn" onclick="increment('counter-{{ training.id }}-{{ counter.id }}', {{ counter.max_count }}, {{ training.id }}, {{ counter.id }})">Incrementar</button>
+                    <button class="btn-reset" onclick="resetCount('counter-{{ training.id }}-{{ counter.id }}', {{ training.id }}, {{ counter.id }})">Resetar</button>
                 </div>
-                <li>Treino difícil: <span id="difficult-training-count-1">0</span> / 5 </li>
-                <div class="btn-group">
-                    <button class="btn" onclick="increment('difficult-training-count-1', 5)">Incrementar</button>
-                    <button class="btn-reset" onclick="resetCount('difficult-training-count-1')">Resetar</button>
-                </div>
-                <li>DM: <span id="dm-count-1">0</span> / 1 </li>
-                <div class="btn-group">
-                    <button class="btn" onclick="increment('dm-count-1', 1)">Incrementar</button>
-                    <button class="btn-reset" onclick="resetCount('dm-count-1')">Resetar</button>
-                </div>
-                <button class="btn-reset-all" onclick="resetAll('kill-count-1', 'difficult-training-count-1', 'dm-count-1')">Resetar todos os contadores</button>
+                {% endfor %}
+                <button class="btn-reset-all" onclick="resetAll({{ training.id }})">Resetar todos os contadores</button>
             </ul>
         </div>
+        {% endfor %}
     </div>
 
     <script>
-        function increment(id, max) {
+        // Função para incrementar um contador
+        function increment(id, max, trainingId, counterId) {
             var span = document.getElementById(id);
             var count = parseInt(span.textContent);
             if (count < max) {
                 span.textContent = count + 1;
+                // Enviar atualização para o servidor
+                fetch('/update-counter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        training_id: trainingId,
+                        counter_id: counterId
+                    })
+                });
             }
         }
 
-        function resetCount(id) {
+        // Função para resetar um contador
+        function resetCount(id, trainingId, counterId) {
             document.getElementById(id).textContent = '0';
+            // Enviar reset para o servidor
+            fetch('/reset-counter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    training_id: trainingId,
+                    counter_id: counterId
+                })
+            });
         }
 
-        function resetAll(...ids) {
-            ids.forEach(id => resetCount(id));
+        // Função para resetar todos os contadores de um treino
+        function resetAll(trainingId) {
+            var spans = document.querySelectorAll(`span[id^='counter-${trainingId}']`);
+            spans.forEach(span => span.textContent = '0');
+            // Enviar reset de todos os contadores para o servidor
+            fetch('/reset-counter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    training_id: trainingId,
+                    counter_id: -1
+                })
+            });
         }
     </script>
 </body>
