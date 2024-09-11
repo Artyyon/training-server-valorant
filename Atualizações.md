@@ -1,0 +1,1 @@
+Colocar a opção de fazer mais treinamento do que o limite.
