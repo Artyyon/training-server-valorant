@@ -1,0 +1,94 @@
+{
+    "trainings": [
+        {
+            "id": 4,
+            "name": "Pre-Partida (Aquecimento)",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "50-75 Kills (Modo Treino Valorant)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Deathmatch (10-15 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 3,
+                    "name": "Aim Lab - Gridshot Precision (5 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 4,
+                    "name": "Aim Lab - Microshot Ultimate (5 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 5,
+                    "name": "Aim Lab - Spider Shot Speed (5 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 6,
+                    "name": "Aim Lab - Sixshot (5 min)",
+                    "count": 0,
+                    "max_count": 1
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Dias de Treino (Sem Partidas)",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "An\u00e1lise de VOD (15-20 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Aim Lab - Gridshot Ultimate (10 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 3,
+                    "name": "Aim Lab - Recoil Control (10 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 4,
+                    "name": "Aim Lab - Reflex Flick (10 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 5,
+                    "name": "Aim Lab - Headshot Precision (15 min)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 6,
+                    "name": "Movimenta\u00e7\u00e3o no Custom Game (Pr\u00e1tica de \u00e2ngulos)",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 7,
+                    "name": "Visualiza\u00e7\u00e3o e Mindfulness",
+                    "count": 0,
+                    "max_count": 1
+                }
+            ]
+        }
+    ]
+}

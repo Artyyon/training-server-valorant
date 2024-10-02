@@ -6,20 +6,34 @@
     <title>TICS - Treino Inteligente de Contadores</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="shortcut icon" type="image/jpg" href="/static/image/ico.jpg"/>
+    <style>
+        /* Remover os marcadores da lista */
+        .container ul {
+            list-style-type: none; /* Remove as bolinhas */
+            padding: 0; /* Remove o padding padrão */
+        }
+    </style>
 </head>
 <body>
     <div class="header">
         <h1>TICS - Treino Inteligente de Contadores</h1>
+        <label for="training-file-select">Selecionar arquivo de treinamento:</label>
+        <select id="training-file-select" class="training-select" onchange="loadTrainingFile()">
+            <!-- <option value="">-- Selecione um arquivo --</option> -->
+            {% for file in training_files %}
+            <option value="{{ file }}">{{ file }}</option>
+            {% endfor %}
+        </select>
     </div>
-    <div class="container">
-        <!-- Gerar cards dinamicamente com Jinja -->
+    <div class="container" id="training-container">
+        <!-- Os blocos de treinamento serão gerados aqui -->
         {% for training in trainings %}
         <div class="card">
             <h2>{{ training.name }}</h2>
             <ul>
                 <!-- Gerar contadores dinamicamente -->
                 {% for counter in training.counters %}
-                <li>{{ counter.name }}: <span id="counter-{{ training.id }}-{{ counter.id }}">{{ counter.count }}</span> / {{ counter.max_count }}</li>
+                <li>{{ counter.name }}: <span id="counter-{{ training.id }}-{{ counter.id }}">{{ counter.count }}</span> / {{ counter.max_count }}</span></li>
                 <div class="btn-group">
                     <button class="btn" onclick="increment('counter-{{ training.id }}-{{ counter.id }}', {{ counter.max_count }}, {{ training.id }}, {{ counter.id }})">Incrementar</button>
                     <button class="btn-reset" onclick="resetCount('counter-{{ training.id }}-{{ counter.id }}', {{ training.id }}, {{ counter.id }})">Resetar</button>
@@ -32,6 +46,47 @@
     </div>
 
     <script>
+        // Função para carregar arquivo de treinamento
+        function loadTrainingFile() {
+            var select = document.getElementById("training-file-select");
+            var fileName = select.value;
+
+            if (fileName) {
+                // Fazer uma chamada para o servidor para carregar os dados do arquivo selecionado
+                fetch(`/load-training/${fileName}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Atualizar a interface com os novos dados
+                        updateTrainingBlocks(data);
+                    })
+                    .catch(error => console.error('Erro ao carregar o arquivo:', error));
+            }
+        }
+
+        // Função para atualizar os blocos de treinamento
+        function updateTrainingBlocks(trainings) {
+            var container = document.getElementById("training-container");
+            container.innerHTML = ''; // Limpa o container atual
+
+            trainings.forEach(training => {
+                var card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `<h2>${training.name}</h2><ul>`;
+                
+                training.counters.forEach(counter => {
+                    card.innerHTML += `
+                        <li>${counter.name}: <span id="counter-${training.id}-${counter.id}">${counter.count}</span> / ${counter.max_count}</span></li>
+                        <div class="btn-group">
+                            <button class="btn" onclick="increment('counter-${training.id}-${counter.id}', ${counter.max_count}, ${training.id}, ${counter.id})">Incrementar</button>
+                            <button class="btn-reset" onclick="resetCount('counter-${training.id}-${counter.id}', ${training.id}, ${counter.id})">Resetar</button>
+                        </div>`;
+                });
+                
+                card.innerHTML += `<button class="btn-reset-all" onclick="resetAll(${training.id})">Resetar todos os contadores</button></ul>`;
+                container.appendChild(card);
+            });
+        }
+
         // Função para incrementar um contador
         function increment(id, max, trainingId, counterId) {
             var span = document.getElementById(id);
@@ -83,6 +138,15 @@
                     counter_id: -1
                 })
             });
+        }
+
+        // Selecionar automaticamente o primeiro arquivo quando a página for carregada
+        window.onload = function() {
+            var select = document.getElementById("training-file-select");
+            if (select.options.length > 1) { // Verifica se há arquivos disponíveis
+                select.selectedIndex = 1; // Seleciona o primeiro arquivo (o segundo item)
+                loadTrainingFile(); // Carrega o arquivo selecionado
+            }
         }
     </script>
 </body>
