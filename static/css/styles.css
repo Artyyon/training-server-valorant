@@ -94,3 +94,42 @@ li {
 .btn-reset-all:hover {
     background-color: #666666;
 }
+
+/* Remover os marcadores da lista */
+.card ul, .card ul li {
+    list-style-type: none; /* Remove as bolinhas dos itens */
+    padding: 0; /* Remove o padding padrão */
+    margin: 0; /* Remove margens padrão */
+}
+
+/* Estilo para o combobox */
+.training-select {
+    width: 300px; /* Largura maior para destacar o combobox */
+    height: 40px; /* Aumenta a altura para melhor visualização */
+    padding: 5px 10px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho de fonte maior */
+    border: 2px solid #2c3e50; /* Borda com cor personalizada */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #ecf0f1; /* Cor de fundo */
+    color: #2c3e50; /* Cor do texto */
+    cursor: pointer; /* Muda o cursor para indicar clicável */
+}
+
+.training-select:focus {
+    border-color: #2980b9; /* Cor da borda quando o combobox estiver focado */
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5); /* Sombra ao redor quando em foco */
+    outline: none; /* Remove o contorno padrão */
+}
+
+.training-select option {
+    font-size: 16px; /* Define o tamanho da fonte das opções */
+    padding: 10px; /* Espaçamento para as opções */
+}
+
+/* Estilo para o label */
+label[for="training-file-select"] {
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    font-weight: bold; /* Negrito para destacar */
+    color: #ffffff; /* Cor do texto */
+    margin-right: 10px; /* Espaçamento entre o label e o combobox */
+}

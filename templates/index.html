@@ -6,13 +6,6 @@
     <title>TICS - Treino Inteligente de Contadores</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="shortcut icon" type="image/jpg" href="/static/image/ico.jpg"/>
-    <style>
-        /* Remover os marcadores da lista */
-        .container ul {
-            list-style-type: none; /* Remove as bolinhas */
-            padding: 0; /* Remove o padding padrão */
-        }
-    </style>
 </head>
 <body>
     <div class="header">
@@ -143,8 +136,8 @@
         // Selecionar automaticamente o primeiro arquivo quando a página for carregada
         window.onload = function() {
             var select = document.getElementById("training-file-select");
-            if (select.options.length > 1) { // Verifica se há arquivos disponíveis
-                select.selectedIndex = 1; // Seleciona o primeiro arquivo (o segundo item)
+            if (select.options.length > 0) { // Verifica se há arquivos disponíveis
+                select.selectedIndex = 0; // Seleciona o primeiro arquivo (o segundo item)
                 loadTrainingFile(); // Carrega o arquivo selecionado
             }
         }
