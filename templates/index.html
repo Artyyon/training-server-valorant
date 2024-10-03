@@ -12,27 +12,24 @@
         <h1>TICS - Treino Inteligente de Contadores</h1>
         <label for="training-file-select">Selecionar arquivo de treinamento:</label>
         <select id="training-file-select" class="training-select" onchange="loadTrainingFile()">
-            <!-- <option value="">-- Selecione um arquivo --</option> -->
             {% for file in training_files %}
             <option value="{{ file }}">{{ file }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="container" id="training-container">
-        <!-- Os blocos de treinamento serão gerados aqui -->
         {% for training in trainings %}
         <div class="card">
             <h2>{{ training.name }}</h2>
             <ul>
-                <!-- Gerar contadores dinamicamente -->
                 {% for counter in training.counters %}
                 <li>{{ counter.name }}: <span id="counter-{{ training.id }}-{{ counter.id }}">{{ counter.count }}</span> / {{ counter.max_count }}</span></li>
                 <div class="btn-group">
-                    <button class="btn" onclick="increment('counter-{{ training.id }}-{{ counter.id }}', {{ counter.max_count }}, {{ training.id }}, {{ counter.id }})">Incrementar</button>
-                    <button class="btn-reset" onclick="resetCount('counter-{{ training.id }}-{{ counter.id }}', {{ training.id }}, {{ counter.id }})">Resetar</button>
+                    <button class="btn" onclick="increment('counter-{{ training.id }}-{{ counter.id }}', {{ counter.max_count }}, {{ training.id }}, {{ counter.id }}, document.getElementById('training-file-select').value)">Incrementar</button>
+                    <button class="btn-reset" onclick="resetCount('counter-{{ training.id }}-{{ counter.id }}', {{ training.id }}, {{ counter.id }}, document.getElementById('training-file-select').value)">Resetar</button>
                 </div>
                 {% endfor %}
-                <button class="btn-reset-all" onclick="resetAll({{ training.id }})">Resetar todos os contadores</button>
+                <button class="btn-reset-all" onclick="resetAll({{ training.id }}, document.getElementById('training-file-select').value)">Resetar todos os contadores</button>
             </ul>
         </div>
         {% endfor %}
@@ -45,11 +42,9 @@
             var fileName = select.value;
 
             if (fileName) {
-                // Fazer uma chamada para o servidor para carregar os dados do arquivo selecionado
                 fetch(`/load-training/${fileName}`)
                     .then(response => response.json())
                     .then(data => {
-                        // Atualizar a interface com os novos dados
                         updateTrainingBlocks(data);
                     })
                     .catch(error => console.error('Erro ao carregar o arquivo:', error));
@@ -59,7 +54,7 @@
         // Função para atualizar os blocos de treinamento
         function updateTrainingBlocks(trainings) {
             var container = document.getElementById("training-container");
-            container.innerHTML = ''; // Limpa o container atual
+            container.innerHTML = '';
 
             trainings.forEach(training => {
                 var card = document.createElement('div');
@@ -70,18 +65,18 @@
                     card.innerHTML += `
                         <li>${counter.name}: <span id="counter-${training.id}-${counter.id}">${counter.count}</span> / ${counter.max_count}</span></li>
                         <div class="btn-group">
-                            <button class="btn" onclick="increment('counter-${training.id}-${counter.id}', ${counter.max_count}, ${training.id}, ${counter.id})">Incrementar</button>
-                            <button class="btn-reset" onclick="resetCount('counter-${training.id}-${counter.id}', ${training.id}, ${counter.id})">Resetar</button>
+                            <button class="btn" onclick="increment('counter-${training.id}-${counter.id}', ${counter.max_count}, ${training.id}, ${counter.id}, document.getElementById('training-file-select').value)">Incrementar</button>
+                            <button class="btn-reset" onclick="resetCount('counter-${training.id}-${counter.id}', ${training.id}, ${counter.id}, document.getElementById('training-file-select').value)">Resetar</button>
                         </div>`;
                 });
                 
-                card.innerHTML += `<button class="btn-reset-all" onclick="resetAll(${training.id})">Resetar todos os contadores</button></ul>`;
+                card.innerHTML += `<button class="btn-reset-all" onclick="resetAll(${training.id}, document.getElementById('training-file-select').value)">Resetar todos os contadores</button></ul>`;
                 container.appendChild(card);
             });
         }
 
         // Função para incrementar um contador
-        function increment(id, max, trainingId, counterId) {
+        function increment(id, max, trainingId, counterId, filename) {
             var span = document.getElementById(id);
             var count = parseInt(span.textContent);
             if (count < max) {
@@ -94,16 +89,16 @@
                     },
                     body: JSON.stringify({
                         training_id: trainingId,
-                        counter_id: counterId
+                        counter_id: counterId,
+                        filename: filename  // Passa o nome do arquivo
                     })
                 });
             }
         }
 
         // Função para resetar um contador
-        function resetCount(id, trainingId, counterId) {
+        function resetCount(id, trainingId, counterId, filename) {
             document.getElementById(id).textContent = '0';
-            // Enviar reset para o servidor
             fetch('/reset-counter', {
                 method: 'POST',
                 headers: {
@@ -111,16 +106,16 @@
                 },
                 body: JSON.stringify({
                     training_id: trainingId,
-                    counter_id: counterId
+                    counter_id: counterId,
+                    filename: filename  // Passa o nome do arquivo
                 })
             });
         }
 
         // Função para resetar todos os contadores de um treino
-        function resetAll(trainingId) {
+        function resetAll(trainingId, filename) {
             var spans = document.querySelectorAll(`span[id^='counter-${trainingId}']`);
             spans.forEach(span => span.textContent = '0');
-            // Enviar reset de todos os contadores para o servidor
             fetch('/reset-counter', {
                 method: 'POST',
                 headers: {
@@ -128,7 +123,8 @@
                 },
                 body: JSON.stringify({
                     training_id: trainingId,
-                    counter_id: -1
+                    counter_id: -1,
+                    filename: filename  // Passa o nome do arquivo
                 })
             });
         }
@@ -136,9 +132,9 @@
         // Selecionar automaticamente o primeiro arquivo quando a página for carregada
         window.onload = function() {
             var select = document.getElementById("training-file-select");
-            if (select.options.length > 0) { // Verifica se há arquivos disponíveis
-                select.selectedIndex = 0; // Seleciona o primeiro arquivo (o segundo item)
-                loadTrainingFile(); // Carrega o arquivo selecionado
+            if (select.options.length > 0) {
+                select.selectedIndex = 0;
+                loadTrainingFile();
             }
         }
     </script>

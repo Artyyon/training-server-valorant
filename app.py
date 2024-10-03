@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 # Caminho para a pasta de arquivos de treinamento
 trainings_folder_path = 'trainings/'
-json_file_path = os.path.join(trainings_folder_path, 'trainings.json')
 
 
 # Função para carregar os dados do arquivo JSON
@@ -31,9 +30,9 @@ def list_training_files(folder_path):
 # Rota principal para exibir a página inicial
 @app.route('/')
 def index():
-    data = load_data_from_json(json_file_path)
+    # Listar arquivos de treinamento
     training_files = list_training_files(trainings_folder_path)
-    return render_template('index.html', trainings=data['trainings'], training_files=training_files)
+    return render_template('index.html', training_files=training_files)
 
 
 # Rota para carregar dados do arquivo de treinamento selecionado
@@ -50,7 +49,9 @@ def load_training(filename):
 # Rota para atualizar contadores
 @app.route('/update-counter', methods=['POST'])
 def update_counter():
-    data = load_data_from_json(json_file_path)
+    filename = request.json['filename']  # Nome do arquivo recebido
+    file_path = os.path.join(trainings_folder_path, filename)  # Caminho do arquivo
+    data = load_data_from_json(file_path)  # Carrega dados do arquivo selecionado
     training_id = int(request.json['training_id'])
     counter_id = int(request.json['counter_id'])
 
@@ -64,14 +65,16 @@ def update_counter():
                         counter['count'] = counter['max_count']
                     break
 
-    save_data_to_json(json_file_path, data)
+    save_data_to_json(file_path, data)  # Salva no arquivo correto
     return jsonify({'message': 'Counter updated successfully!'})
 
 
 # Rota para resetar contadores
 @app.route('/reset-counter', methods=['POST'])
 def reset_counter():
-    data = load_data_from_json(json_file_path)
+    filename = request.json['filename']  # Nome do arquivo recebido
+    file_path = os.path.join(trainings_folder_path, filename)  # Caminho do arquivo
+    data = load_data_from_json(file_path)  # Carrega dados do arquivo selecionado
     training_id = int(request.json['training_id'])
     counter_id = int(request.json.get('counter_id', -1))
 
@@ -87,7 +90,7 @@ def reset_counter():
                         counter['count'] = 0
                         break
 
-    save_data_to_json(json_file_path, data)
+    save_data_to_json(file_path, data)  # Salva no arquivo correto
     return jsonify({'message': 'Counters reset successfully!'})
 
 
