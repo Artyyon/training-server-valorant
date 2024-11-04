@@ -71,6 +71,24 @@
                     "max_count": 1
                 }
             ]
+        },
+        {
+            "id": 4,
+            "name": "Esperimental",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "50 bots andando para o lado",
+                    "count": 4,
+                    "max_count": 5
+                },
+                {
+                    "id": 2,
+                    "name": "Mata-mata em equipe",
+                    "count": 1,
+                    "max_count": 1
+                }
+            ]
         }
     ]
 }
