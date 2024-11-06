@@ -1,0 +1,76 @@
+{
+    "trainings": [
+        {
+            "id": 1,
+            "name": "Treino de Concentração e Tomada de Decisão",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "Valorant - Deathmatch",
+                    "count": 0,
+                    "max_count": 3
+                },
+                {
+                    "id": 2,
+                    "name": "Meditação/Respiração - 5 min",
+                    "count": 0,
+                    "max_count": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Posicionamento de Mira",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "Valorant - The Range - 15 min",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 2,
+                    "name": "AimLabs - Tracking",
+                    "count": 0,
+                    "max_count": 5
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Controle de Recuo e Disparo",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "AimLabs - Gridshot Ultimate",
+                    "count": 0,
+                    "max_count": 10
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Treino de Flicks",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "AimLabs - Microshot",
+                    "count": 0,
+                    "max_count": 10
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Abertura de Ângulos",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "Valorant - The Range - 10 min",
+                    "count": 0,
+                    "max_count": 1
+                }
+            ]
+        }
+    ]
+}
