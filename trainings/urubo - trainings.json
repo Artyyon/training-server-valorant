@@ -1,0 +1,64 @@
+{
+    "trainings": [
+        {
+            "id": 1,
+            "name": "Training",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "STEP 1: Deadzoning",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 2,
+                    "name": "STEP 2: Clicking Warm-up",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 3,
+                    "name": "STEP 3: Tracking Warm-up",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 4,
+                    "name": "STEP 4: Recoil Control",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 5,
+                    "name": "STEP 5: Target Switching",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 6,
+                    "name": "STEP 6: Moving, Tracking, Clicking",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 7,
+                    "name": "STEP 7.1: Sheriff DM",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 8,
+                    "name": "STEP 7.2: Vandal DM",
+                    "count": 0,
+                    "max_count": 1
+                },
+                {
+                    "id": 9,
+                    "name": "STEP 7.3: Phantom DM",
+                    "count": 0,
+                    "max_count": 1
+                }
+            ]
+        }
+    ]
+}
