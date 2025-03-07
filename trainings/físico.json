@@ -1,0 +1,28 @@
+{
+    "trainings": [
+        {
+            "id": 1,
+            "name": "Training",
+            "counters": [
+                {
+                    "id": 1,
+                    "name": "Flex\u00e3o",
+                    "count": 0,
+                    "max_count": 100
+                },
+                {
+                    "id": 2,
+                    "name": "Abdominal",
+                    "count": 0,
+                    "max_count": 100
+                },
+                {
+                    "id": 3,
+                    "name": "Agachamento",
+                    "count": 0,
+                    "max_count": 100
+                }
+            ]
+        }
+    ]
+}
