@@ -7,31 +7,31 @@
                 {
                     "id": 1,
                     "name": "Trabalho (40 minutos)",
-                    "count": 2,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
                     "id": 2,
                     "name": "Leitura (5 minutos)",
-                    "count": 1,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
                     "id": 3,
                     "name": "Estudo / CEIA (20 minutos)",
-                    "count": 1,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
                     "id": 4,
                     "name": "Responder mensagens (5 minutos)",
-                    "count": 1,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
                     "id": 5,
                     "name": "Relaxamento Mental (3 minutos)",
-                    "count": 2,
+                    "count": 0,
                     "max_count": 100
                 }
             ]
