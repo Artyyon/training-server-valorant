@@ -7,13 +7,13 @@
                 {
                     "id": 1,
                     "name": "Trabalho (40 minutos)",
-                    "count": 8,
+                    "count": 2,
                     "max_count": 100
                 },
                 {
                     "id": 2,
                     "name": "Leitura (5 minutos)",
-                    "count": 2,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
@@ -31,7 +31,7 @@
                 {
                     "id": 5,
                     "name": "Relaxamento Mental (3 minutos)",
-                    "count": 5,
+                    "count": 0,
                     "max_count": 100
                 }
             ]
