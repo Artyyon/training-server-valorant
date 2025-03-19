@@ -7,19 +7,19 @@
                 {
                     "id": 1,
                     "name": "Flex\u00e3o",
-                    "count": 20,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
                     "id": 2,
                     "name": "Abdominal",
-                    "count": 20,
+                    "count": 0,
                     "max_count": 100
                 },
                 {
                     "id": 3,
                     "name": "Agachamento",
-                    "count": 20,
+                    "count": 0,
                     "max_count": 100
                 }
             ]
