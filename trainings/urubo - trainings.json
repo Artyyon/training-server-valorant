@@ -7,25 +7,25 @@
                 {
                     "id": 1,
                     "name": "STEP 1: Deadzoning",
-                    "count": 0,
+                    "count": 1,
                     "max_count": 1
                 },
                 {
                     "id": 2,
                     "name": "STEP 2: Clicking Warm-up",
-                    "count": 0,
+                    "count": 1,
                     "max_count": 1
                 },
                 {
                     "id": 3,
                     "name": "STEP 3: Tracking Warm-up",
-                    "count": 0,
+                    "count": 1,
                     "max_count": 1
                 },
                 {
                     "id": 4,
                     "name": "STEP 4: Recoil Control",
-                    "count": 0,
+                    "count": 1,
                     "max_count": 1
                 },
                 {
